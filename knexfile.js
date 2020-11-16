@@ -3,7 +3,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './database/virtualreality.db3'
+      filename: './database/development.db3'
     },
     useNullAsDefault: true,
     migrations: {
@@ -19,36 +19,41 @@ module.exports = {
     },
   },
 
-  staging: {
-    client: 'postgresql',
+  testing: {
+    client: 'sqlite3',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
+      filename: './data/testing.db3',
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './database/migrations',
+    },
+    seeds: {
+      directory: './database/seeds',
     },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done)
+      }
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
   },
 
   production: {
-    client: 'postgresql',
+    client: 'sqlite3',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
+      filename: './database/production.db3'
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './database/migrations'
+    },
+    seeds: {
+      directory: './database/seeds'
     },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done)
+      }
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
   }
-
 }
