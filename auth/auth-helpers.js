@@ -19,11 +19,12 @@ function validateUser(req, res, next) {
 
 function generateToken(user) {
     const payload = {
-      subject: user.id,
-      username: user.username
+      subject: user.user_id,
+      username: user.user_username,
+      role: user.user_role
     }
     const options = {
-      expiresIn: 60 * 30
+      expiresIn: 60 * 60 * 3
     }
     return jwt.sign(payload, jwtSecret, options)
   }
