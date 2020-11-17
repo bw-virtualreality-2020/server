@@ -5,7 +5,9 @@ const helmet = require('helmet')
 
 //imports
 const authRouter = require('../auth/auth-router')
+const projectRouter = require('../projects/project-router')
 const { validateUser } = require('../auth/auth-helpers')
+const { authorize } = require('../auth/auth-helpers')
 
 //server
 const server = express()
@@ -17,6 +19,7 @@ server.use(express.json())
 
 //routes
 server.use('/api/auth', validateUser, authRouter)
+server.use('/api/projects', authorize, projectRouter)
 
 //endpoints
 //[GET] /
