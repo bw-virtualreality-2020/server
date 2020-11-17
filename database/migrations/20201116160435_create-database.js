@@ -9,6 +9,12 @@ exports.up = function (knex) {
             tbl.string('user_bio', 255)
             tbl.string('user_image', 255)
         })
+        .createTable('projects', tbl => {
+            tbl.increments('project_id')
+            tbl.string('project_name', 128).notNullable().unique()
+            tbl.string('project_description', 255)
+            tbl.decimal('project_goal')
+        })
         .createTable('donations', tbl => {
             tbl.increments('donation_id')
             tbl.decimal('donation_amount').notNullable()
@@ -27,12 +33,6 @@ exports.up = function (knex) {
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE')
             
-        })
-        .createTable('projects', tbl => {
-            tbl.increments('project_id')
-            tbl.string('project_name', 128).notNullable().unique()
-            tbl.string('project_description', 255)
-            tbl.decimal('project_goal')
         })
         .createTable('images', tbl => {
             tbl.increments('image_id')
@@ -68,7 +68,7 @@ exports.down = function (knex) {
     return knex.schema
         .dropTableIfExists('user_projects')
         .dropTableIfExists('images')
-        .dropTableIfExists('projects')
         .dropTableIfExists('donations')
+        .dropTableIfExists('projects')
         .dropTableIfExists('users')
 }
