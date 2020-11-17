@@ -2,7 +2,7 @@
 const bcrypt = require('bcryptjs')
 
 //imports
-const { generateToken, validateUser } = require('./auth-helpers')
+const { generateToken } = require('./auth-helpers')
 const rounds = parseInt(process.env.BCRYPT_ROUNDS) || 10
 const Users = require('../users/user-model')
 
@@ -10,7 +10,7 @@ const Users = require('../users/user-model')
 const router = require('express').Router()
 
 //endpoints
-router.post('/register', validateUser, async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const { password } = req.body
         const hash = bcrypt.hashSync(password, rounds)
@@ -24,7 +24,7 @@ router.post('/register', validateUser, async (req, res) => {
     }
 })
 
-router.post('/login', validateUser, async (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body
     try {
         const user = await Users.findBy({ 'user_username': username }).first()

@@ -5,6 +5,7 @@ const helmet = require('helmet')
 
 //imports
 const authRouter = require('../auth/auth-router')
+const { validateUser } = require('../auth/auth-helpers')
 
 //server
 const server = express()
@@ -15,7 +16,7 @@ server.use(cors())
 server.use(express.json())
 
 //routes
-server.use('/api/auth', authRouter)
+server.use('/api/auth', validateUser, authRouter)
 
 server.get('/', (req, res) => {
     res.status(200).json({ api: 'up' })
