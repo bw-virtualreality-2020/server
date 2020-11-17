@@ -21,6 +21,24 @@ function validateUser(req, res, next) {
     }
 }
 
+function authorize(req, res, next) {
+    const jwt = require('jsonwebtoken')
+    const { jwtSecret } = require('./auth-secrets')
+    const token = req.headers.authorization
+    if (!token) {
+        res.status(401).json({ message: 'Access denied: missing authorization token.' })
+    } else {
+        jwt.verify(token, jwtSecret, (err, decoded) => {
+            if (err) {
+                res.status(401).json({ message: 'Access denied: invalid authorization token.' })
+            } else {
+                req.decoded = decoded
+                next()
+            }
+        })
+    }
+}
+
 //helpers
 function generateToken(user) {
     const payload = {
@@ -37,5 +55,6 @@ function generateToken(user) {
 //exports
 module.exports = {
     validateUser,
-    generateToken
+    generateToken,
+    authorize
 }

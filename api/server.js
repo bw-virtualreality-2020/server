@@ -3,9 +3,14 @@ const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
 
-//imports
-const authRouter = require('../auth/auth-router')
-const { validateUser } = require('../auth/auth-helpers')
+//routers
+const authRouter = require('../routes/auth/auth-router')
+const projectRouter = require('../routes/projects/project-router')
+const categoryRouter = require('../routes/categories/category-router')
+
+//middleware
+const { validateUser } = require('../routes/auth/auth-helpers')
+const { authorize } = require('../routes/auth/auth-helpers')
 
 //server
 const server = express()
@@ -17,6 +22,8 @@ server.use(express.json())
 
 //routes
 server.use('/api/auth', validateUser, authRouter)
+server.use('/api/projects', authorize, projectRouter)
+server.use('/api/categories', authorize, categoryRouter)
 
 //endpoints
 //[GET] /

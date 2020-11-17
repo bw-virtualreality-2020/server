@@ -1,5 +1,5 @@
 //imports
-const db = require('../database/db-config')
+const db = require('../../database/db-config')
 
 //access methods
 //get users
