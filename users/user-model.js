@@ -10,10 +10,12 @@ function findBy(filter) {
 
 async function add(creds) {
     try {
-        const [id] = await db('users').insert(creds)
-        return find().where({ id }).first()
+        const user = { user_username: creds.username, user_password: creds.password, user_email: creds.email, user_role: creds.role }
+        const [id] = await db('users').insert(user)
+        return find().where({ 'user_id': id }).first()
     } catch (err) {
-        return err
+        console.log(err)
+        throw err
     }
 }
 

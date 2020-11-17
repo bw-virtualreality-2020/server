@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 
 //imports
 const { generateToken, validateUser } = require('./auth-helpers')
-const rounds = process.env.HASH_ROUNDS || 10
+const rounds = parseInt(process.env.HASH_ROUNDS) || 10
 const Users = require('../users/user-model')
 
 //router
@@ -19,7 +19,8 @@ router.post('/register', validateUser, async (req, res) => {
         const token = generateToken(user)
         res.status(201).json({ user, token })
     } catch (err) {
-        res.status(500).json({ message: err.message, stack: err.stack })
+        console.log(err)
+        res.status(500).json({ message: err.message, stack: err.stack, code: err.code, errno: err.errno })
     }
 })
 
