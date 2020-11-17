@@ -32,7 +32,7 @@ function validateProject(req, res, next) {
 
 //endpoints
 //[GET] /projects
-router.get('/', async (req, res, next) => {
+router.get('/', async (_req, res, next) => {
     try {
         const projects = await Projects.find()
         res.status(200).json({ projects })
@@ -57,7 +57,7 @@ router.post('/', validateProject, async (req, res, next) => {
 })
 
 //error handling middleware
-router.use((err, req, res, next) => {
+router.use((err, _req, res, _next) => {
     console.log(err)
     res.status(500).json({ message: err.message, stack: err.stack, errno: err.errno, code: err.code })
 })

@@ -1,11 +1,13 @@
-const db = require('../database/db-config')
+const db = require('../../database/db-config')
 
 function find() {
-    return db('projects').orderBy('project_id')
+    return db('projects')
 }
 
 function findById(id) {
-    return db('projects').where({ 'project_id': id }).first()
+    return db('projects')
+        .where({ 'project_id': id })
+        .first()
 }
 
 async function add(project) {
