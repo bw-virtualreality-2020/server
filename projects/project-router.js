@@ -19,8 +19,19 @@ async function validateId(req, res, next) {
     }
 }
 
+function validateProject(req, res, next) {
+    const { project_name, project_goal } = req.body
+    if (!project_name) {
+        res.status(400).json({ message: 'Must include project name.' })
+    } else if (project_goal && typeof project_goal !== 'number' || typeof project_goal === 'string' || Math.sign(project_goal) === -1) {
+        res.status(400).json({ message: 'Project goal must be positive decimal number.' })
+    } else {
+        next()
+    }
+}
+
 //endpoints
-//[GET] /
+//[GET] /projects
 router.get('/', async (req, res, next) => {
     try {
         const projects = await Projects.find()
@@ -30,9 +41,19 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-//[GET] /:id
+//[GET] /projects/:id
 router.get('/:id', validateId, (req, res) => {
     res.status(200).json({ project: req.project })
+})
+
+//[POST] /projects
+router.post('/', validateProject, async (req, res, next) => {
+    try {
+        const project = await Projects.add(req.body)
+        res.status(201).json({ project })
+    } catch (err) {
+        next(err)
+    }
 })
 
 //error handling middleware
