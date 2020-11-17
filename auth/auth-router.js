@@ -10,6 +10,7 @@ const Users = require('../users/user-model')
 const router = require('express').Router()
 
 //endpoints
+//[POST] /register
 router.post('/register', async (req, res) => {
     try {
         const { password } = req.body
@@ -24,6 +25,7 @@ router.post('/register', async (req, res) => {
     }
 })
 
+//[POST] /login
 router.post('/login', async (req, res) => {
     const { username, password } = req.body
     try {
@@ -39,5 +41,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
+//exports
 module.exports = router
+
 

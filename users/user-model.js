@@ -1,13 +1,18 @@
+//imports
 const db = require('../database/db-config')
 
+//access methods
+//get users
 function find() {
     return db('users')
 }
 
+//get users by filter
 function findBy(filter) {
     return db('users').where(filter)
 }
 
+//add user
 async function add(creds) {
     try {
         const user = { user_username: creds.username, user_password: creds.password, user_email: creds.email, user_role: creds.role }
@@ -19,8 +24,9 @@ async function add(creds) {
     }
 }
 
+//exports
 module.exports = {
-    find, 
+    find,
     findBy,
     add
 }

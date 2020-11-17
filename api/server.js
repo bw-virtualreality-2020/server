@@ -18,8 +18,11 @@ server.use(express.json())
 //routes
 server.use('/api/auth', validateUser, authRouter)
 
+//endpoints
+//[GET] /
 server.get('/', (req, res) => {
-    res.status(200).json({ api: 'up' })
+    res.status(200).json({ message: 'Welcome' })
 })
 
+//exports
 module.exports = server
