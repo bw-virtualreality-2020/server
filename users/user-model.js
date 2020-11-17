@@ -16,7 +16,7 @@ function findBy(filter) {
 async function add(creds) {
     try {
         const user = { user_username: creds.username, user_password: creds.password, user_email: creds.email, user_role: creds.role }
-        const [id] = await db('users').insert(user)
+        const [id] = await db('users').insert(user, 'user_id')
         return find().where({ 'user_id': id }).first()
     } catch (err) {
         console.log(err)
