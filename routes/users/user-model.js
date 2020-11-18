@@ -41,11 +41,18 @@ async function update(id, updates) {
     }
 }
 
+function remove(id) {
+    return db('users')
+        .where({ 'user_id': id })
+        .del()
+}
+
 //exports
 module.exports = {
     find,
     findBy,
     findById,
     add,
-    update
+    update,
+    remove
 }

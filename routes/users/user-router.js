@@ -1,11 +1,14 @@
+//modules
+const bcrypt = require('bcryptjs')
+
 //imports
 const Users = require('./user-model')
+const rounds = parseInt(process.env.BCRYPT_ROUNDS) || 10
 
 //router
 const router = require('express').Router()
 
 function validateRole(req, res, next) {
-    console.log(req.decoded)
     const { role } = req.decoded
     if (role !== 'admin') {
         res.status(401).json({ message: 'Unauthorized' })
@@ -50,33 +53,34 @@ router.get('/:id', validateId, (req, res) => {
     }
 })
 
-//[POST] /users
-// router.post('/', validateProject, async (req, res, next) => {
-//     try {
-//         const project = await Users.add(req.body)
-//         res.status(201).json({ project })
-//     } catch (err) {
-//         next(err)
-//     }
-// })
-
 //[PUT] /users:id
 router.put('/:id', validateId, async (req, res, next) => {
-    const { id } = req.params
     try {
-        const updatedUser = await Users.update(id, req.body)
-        res.status(200).json({ updatedUser })
+        const { user_id } = req.user
+        const { user_password } = req.body
+        if (user_id === req.decoded.subject) {
+            if (!user_password) {
+                const updatedUser = await Users.update(user_id, req.body)
+                res.status(200).json({ updatedUser })
+            } else {
+                const hash = bcrypt.hashSync(user_password, rounds)
+                const updatedUser = await Users.update(user_id, { ...req.body, user_password: hash })
+                res.status(200).json({ updatedUser })
+            }
+        } else {
+            res.status(401).json({ message: 'Unauthorized' })
+        }
     } catch (err) {
         next(err)
     }
 })
 
 //[DELETE] /users/:id
-router.delete('/:id', validateId, async (req, res, next) => {
+router.delete('/:id', validateRole, validateId, async (req, res, next) => {
     const { id } = req.params
     try {
-        const deletedProjects = await Users.remove(id)
-        res.status(200).json({ deletedProjects })
+        const deletedUsers = await Users.remove(id)
+        res.status(200).json({ deletedUsers })
     } catch (err) {
         next(err)
     }
