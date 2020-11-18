@@ -22,7 +22,7 @@ BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 | POST   | /api/categories              | Creates category, returns new category object     |
 
 
-## [POST] /api/auth/register
+# [POST] /api/auth/register
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/auth/register`
 
@@ -50,7 +50,7 @@ Description: Creates new user; returns new user object and signed token.
 }
 ```
 
-## [POST] /api/auth/login
+# [POST] /api/auth/login
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/auth/login`
 
@@ -70,7 +70,7 @@ Description: Authenticates user; returns user object and signed token.
 }
 ```
 
-## [GET] /api/projects
+# [GET] /api/projects
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects`
 
@@ -90,7 +90,7 @@ Description: Returns array of all saved projects.
     ]
 }
 ```
-## [GET] /api/projects/:id
+# [GET] /api/projects/:id
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects/:id`
 
@@ -109,7 +109,7 @@ Description: Returns project object by id.
 }
 ```
 
-## [POST] /api/projects
+# [POST] /api/projects
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects`
 
@@ -131,7 +131,7 @@ Description: Creates new project; returns new project object.
 }
 ```
 
-## [GET] /api/categories
+# [GET] /api/categories
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/categories`
 
@@ -149,7 +149,7 @@ Description: Returns array of all saved categories.
     ]
 }
 ```
-## [GET] /api/categories/:id
+# [GET] /api/categories/:id
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/categories/:id`
 
@@ -166,7 +166,7 @@ Description: Returns category object by id.
 }
 ```
 
-## [POST] /api/categories
+# [POST] /api/categories
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/categories`
 
