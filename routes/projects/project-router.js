@@ -56,6 +56,28 @@ router.post('/', validateProject, async (req, res, next) => {
     }
 })
 
+//[PUT] /projects:id
+router.put('/:id', validateId, validateProject, async (req, res, next) => {
+    const { id } = req.params
+    try {
+        const updatedProject = await Projects.update(id, req.body)
+        res.status(200).json({ updatedProject })
+    } catch (err) {
+        next(err)
+    }
+})
+
+//[DELETE] /projects/:id
+router.delete('/:id', validateId, async (req, res, next) => {
+    const { id } = req.params
+    try {
+        const updatedProject = await Projects.update(id, req.body)
+        res.status(200).json({ updatedProject })
+    } catch (err) {
+        next(err)
+    }
+})
+
 //error handling middleware
 router.use((err, _req, res, _next) => {
     console.log(err)

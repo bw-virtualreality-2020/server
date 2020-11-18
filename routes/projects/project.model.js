@@ -21,8 +21,19 @@ async function add(project) {
     }
 }
 
+async function update(id, updates) {
+    try {
+        const count = await db('projects').where({ 'project_id': id }).update(updates)
+        return count === 1 ? findById(id) : null
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
+}
+
 module.exports = {
     find,
     findById,
-    add
+    add,
+    update
 }
