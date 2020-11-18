@@ -2,7 +2,7 @@
 
 ## Database Schema
 
-![alt text](https://github.com/bw-virtualreality-2020/server/blob/main/images/db-schema.png?raw=true)
+![alt text](https://github.com/bw-virtualreality-2020/server/blob/main/images/Screen%20Shot%202020-11-18%20at%201.42.31%20PM.png?raw=true)
 
 ## Endpoints
 
