@@ -55,7 +55,7 @@ router.post('/', validateCategory, async (req, res, next) => {
 })
 
 //error handling middleware
-router.use((err, req, res, next) => {
+router.use((err, _req, res, _next) => {
     console.log(err)
     res.status(500).json({ message: err.message, stack: err.stack, errno: err.errno, code: err.code })
 })
