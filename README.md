@@ -1,10 +1,10 @@
 ### Virtual Reality Venture API
 
-### Database Schema:
+## Database Schema:
 
 ![alt text](https://github.com/bw-virtualreality-2020/server/blob/main/images/db-schema.png?raw=true)
 
-### Endpoints
+## Endpoints
 
 BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 
@@ -22,7 +22,7 @@ BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 | POST   | /api/categories              | Creates category, returns new category object     |
 
 
-### [POST] /api/auth/register
+## [POST] /api/auth/register
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/auth/register`
 
@@ -50,7 +50,7 @@ Description: Creates new user; returns new user object and signed token.
 }
 ```
 
-### [POST] /api/auth/login
+## [POST] /api/auth/login
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/auth/login`
 
@@ -70,7 +70,7 @@ Description: Authenticates user; returns user object and signed token.
 }
 ```
 
-### [GET] /api/projects
+## [GET] /api/projects
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects`
 
@@ -90,7 +90,7 @@ Description: Returns array of all saved projects.
     ]
 }
 ```
-### [GET] /api/projects/:id
+## [GET] /api/projects/:id
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects/:id`
 
@@ -109,7 +109,7 @@ Description: Returns project object by id.
 }
 ```
 
-### [POST] /api/projects
+## [POST] /api/projects
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects`
 
@@ -130,5 +130,59 @@ Description: Creates new project; returns new project object.
     "project_goal": 5000
 }
 ```
+
+## [GET] /api/categories
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/categories`
+
+Description: Returns array of all saved categories.
+
+**Sample Response**
+
+```js
+{
+    "categories": [
+        {
+            "category_id": 1,
+            "category_name": "Augmented Reality"
+        }
+    ]
+}
+```
+## [GET] /api/categories/:id
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/categories/:id`
+
+Description: Returns category object by id.
+
+**Sample Response**
+
+```js
+{
+    "category": {
+        "category_id": 1,
+        "category_name": "Augmented Reality"
+    }
+}
+```
+
+## [POST] /api/categories
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/categories`
+
+Description: Creates new category; returns new category object.
+
+**Accepted Fields**
+
+- **category_name** _(required)_ string, must be unique, 128 chars. max
+
+**Sample Request**
+
+```js
+{
+    "category_name": Augmented Reality",
+}
+```
+
 
 
