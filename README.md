@@ -16,12 +16,12 @@ BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 | POST   | /api/auth/login              | Authenticates user; returns user object and token |
 | GET    | /api/projects                | Returns array of saved projects                   |
 | GET    | /api/projects/:id            | Returns project object by id                      |
-| POST   | /api/projects                | Creates project, returns new project object       |
-| PUT    | /api/projects/:id            | Updates project, returns updated project object   |
-| DELETE | /api/projects/:id            | Deletes project, returns number of deleted items  |
+| POST   | /api/projects                | Creates project; returns new project object       |
+| PUT    | /api/projects/:id            | Updates project; returns updated project object   |
+| DELETE | /api/projects/:id            | Deletes project; returns number of deleted items  |
 | GET    | /api/categories              | Returns array of saved categories                 |
 | GET    | /api/categories/:id          | Returns category object by id                     | 
-| POST   | /api/categories              | Creates category, returns new category object     |
+| POST   | /api/categories              | Creates category; returns new category object     |
 
 
 ### [POST] /api/auth/register
