@@ -31,9 +31,16 @@ async function update(id, updates) {
     }
 }
 
+function remove(id) {
+    return db('projects')
+        .where({ 'project_id': id })
+        .del()
+}
+
 module.exports = {
     find,
     findById,
     add,
-    update
+    update,
+    remove
 }
