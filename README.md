@@ -120,6 +120,7 @@ Description: Creates new project; returns new project object.
 - **project_name** _(required)_ string, must be unique, 128 chars. max
 - **project_description** _(optional)_ string, 255 chars. max
 - **project_goal** _(optional)_ number, must be a positive decimal
+- **project_image** _(optional)_ string, must be valid url, 255 chars. max
 
 **Sample Request**
 
@@ -127,7 +128,8 @@ Description: Creates new project; returns new project object.
 {
     "project_name": "Virtual Reality Venture",
     "project_description": "",
-    "project_goal": 5000
+    "project_goal": 5000,
+    "project_image": "https://cdn.pixabay.com/photo/2019/01/31/20/52/web-3967926_960_720.jpg"
 }
 ```
 
