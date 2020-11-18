@@ -5,6 +5,7 @@ const helmet = require('helmet')
 
 //routers
 const authRouter = require('../routes/auth/auth-router')
+const userRouter = require('../routes/users/user-router')
 const projectRouter = require('../routes/projects/project-router')
 const categoryRouter = require('../routes/categories/category-router')
 
@@ -22,6 +23,7 @@ server.use(express.json())
 
 //routes
 server.use('/api/auth', validateUser, authRouter)
+server.use('/api/users', authorize, userRouter)
 server.use('/api/projects', authorize, projectRouter)
 server.use('/api/categories', authorize, categoryRouter)
 

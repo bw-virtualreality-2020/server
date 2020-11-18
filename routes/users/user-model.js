@@ -7,6 +7,12 @@ function find() {
     return db('users')
 }
 
+function findById(id) {
+    return db('users')
+        .where({ 'user_id': id })
+        .first()
+}
+
 //get users by filter
 function findBy(filter) {
     return db('users').where(filter)
@@ -24,9 +30,29 @@ async function add(creds) {
     }
 }
 
+//update user
+async function update(id, updates) {
+    try {
+        const count = await db('users').where({ 'user_id': id }).update(updates)
+        return count === 1 ? findById(id) : null
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
+}
+
+function remove(id) {
+    return db('users')
+        .where({ 'user_id': id })
+        .del()
+}
+
 //exports
 module.exports = {
     find,
     findBy,
-    add
+    findById,
+    add,
+    update,
+    remove
 }
