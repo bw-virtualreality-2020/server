@@ -42,7 +42,12 @@ router.get('/', validateRole, async (_req, res, next) => {
 
 //[GET] /users/:id
 router.get('/:id', validateId, (req, res) => {
-    res.status(200).json({ project: req.project })
+    const { user_id } = req.user
+    if (user_id === req.decoded.subject) {
+        res.status(200).json({ user: req.user })
+    } else {
+        res.status(401).json({ message: 'Unauthorized' })
+    }
 })
 
 //[POST] /users
