@@ -17,6 +17,8 @@ BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 | GET    | /api/projects                | Returns array of saved projects                   |
 | GET    | /api/projects/:id            | Returns project object by id                      |
 | POST   | /api/projects                | Creates project, returns new project object       |
+| PUT    | /api/projects/:id            | Updates project, returns updated project object   |
+| DELETE | /api/projects/:id            | Deletes project, returns number of deleted items  |
 | GET    | /api/categories              | Returns array of saved categories                 |
 | GET    | /api/categories/:id          | Returns category object by id                     | 
 | POST   | /api/categories              | Creates category, returns new category object     |
@@ -130,6 +132,45 @@ Description: Creates new project; returns new project object.
     "project_description": "",
     "project_goal": 5000,
     "project_image": "https://cdn.pixabay.com/photo/2019/01/31/20/52/web-3967926_960_720.jpg"
+}
+```
+
+### [PUT] /api/projects/:id
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects/:id`
+
+Description: Updates existing project; on success returns updated project object. Failure to update a project returns null.
+
+**Accepted Fields**
+
+- **project_name** _(required)_ string, must be unique, 128 chars. max
+- **project_description** _(optional)_ string, 255 chars. max
+- **project_goal** _(optional)_ number, must be a positive decimal
+- **project_image** _(optional)_ string, must be valid url, 255 chars. max
+
+**Sample Request**
+
+```js
+{
+    "project_name": "Virtual Reality Venture",
+    "project_description": "",
+    "project_goal": 5000,
+    "project_image": "https://cdn.pixabay.com/photo/2019/01/31/20/52/web-3967926_960_720.jpg"
+}
+```
+
+### [DELETE] /api/projects/:id
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects/:id`
+
+Description: Deletes existing project; returns number of deleted items (1 on successful deletion or 0 on failure).
+
+
+**Sample Response**
+
+```js
+{
+    "deletedProjects": 1
 }
 ```
 
