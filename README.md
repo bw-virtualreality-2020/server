@@ -1,10 +1,10 @@
 ### Virtual Reality Venture API
 
-### DATABASE SCHEMA:
+### Database Schema:
 
 ![alt text](https://github.com/bw-virtualreality-2020/server/blob/main/images/db-schema.png?raw=true)
 
-### ENDPOINTS 
+### Endpoints
 
 BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 
@@ -25,6 +25,7 @@ BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 ### [POST] /api/auth/register
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/auth/register`
+
 Description: Creates new user; returns new user object and signed token.
 
 **Accepted Fields**
@@ -32,7 +33,7 @@ Description: Creates new user; returns new user object and signed token.
 - **username** _(required)_ string, must be unique, 128 chars. max
 - **password** _(required)_ string, 128 chars. max
 - **email** _(required)_ string, must be unique, 128 chars. max
-- **role** _(require)_ string, must be either "fundraiser" or "funder"
+- **role** _(required)_ string, must be either "fundraiser" or "funder"
 - **bio** _(optional)_ string, 255 chars. max
 - **image** _(optional)_ string, 255 chars. max
 
@@ -52,6 +53,7 @@ Description: Creates new user; returns new user object and signed token.
 ### [POST] /api/auth/login
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/auth/login`
+
 Description: Authenticates user; returns user object and signed token.
 
 **Accepted Fields**
@@ -71,6 +73,7 @@ Description: Authenticates user; returns user object and signed token.
 ### [GET] /api/projects
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects`
+
 Description: Returns array of all saved projects.
 
 **Sample Response**
@@ -90,6 +93,7 @@ Description: Returns array of all saved projects.
 ### [GET] /api/projects/:id
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects/:id`
+
 Description: Returns project object by id.
 
 **Sample Response**
@@ -104,4 +108,27 @@ Description: Returns project object by id.
     }
 }
 ```
+
+### [POST] /api/projects
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects`
+
+Description: Creates new project; returns new project object.
+
+**Accepted Fields**
+
+- **project_name** _(required)_ string, must be unique, 128 chars. max
+- **project_description** _(optional)_ string, 255 chars. max
+- **project_goal** _(optional)_ number, must be a positive decimal
+
+**Sample Request**
+
+```js
+{
+    "project_name": "Virtual Reality Venture",
+    "project_description": "",
+    "project_goal": 5000
+}
+```
+
 
