@@ -1,5 +1,5 @@
 //imports
-const Projects = require('./project.model')
+const Projects = require('./project-model')
 const Categories = require('../categories/category-model')
 const ProjectCategories = require('../project_categories/project_category-model')
 const { validateId, validateProject, validateChanges } = require('./project-helpers')
