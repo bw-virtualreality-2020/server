@@ -4,43 +4,10 @@ const bcrypt = require('bcryptjs')
 //imports
 const Users = require('./user-model')
 const rounds = parseInt(process.env.BCRYPT_ROUNDS) || 10
+const { validateChanges, validateId, validateRole } = require('./user-helpers')
 
 //router
 const router = require('express').Router()
-
-function validateRole(req, res, next) {
-    const { role } = req.decoded
-    if (role !== 'admin') {
-        res.status(401).json({ message: 'Unauthorized' })
-    } else {
-        next()
-    }
-}
-
-function validateChanges(req, res, next) {
-    if (req.body.user_id !== req.decoded.subject) {
-        res.status(400).json({ message: 'Cannot change user id.' })
-    } else if (req.body.user_role !== 'fundraiser' && req.body.user_role !== 'funder') {
-        res.status(400).json({ message: 'User role must be either fundraiser or funder.' })
-    } else {
-        next()
-    }
-}
-
-async function validateId(req, res, next) {
-    const id = req.params.id
-    try {
-        const user = await Users.findById(id)
-        if (!user) {
-            res.status(404).json({ message: `User with id ${id} not found.` })
-        } else {
-            req.user = user
-            next()
-        }
-    } catch (err) {
-        next(err)
-    }
-}
 
 //endpoints
 //[GET] /users
