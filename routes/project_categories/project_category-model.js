@@ -2,7 +2,7 @@
 const db = require('../../database/db-config')
 
 //access methods
-function getById(id) {
+function findById(id) {
     return db('project_categories as pc')
         .join('projects as p', 'pc.project_id', 'p.project_id')
         .join('categories as c', 'pc.category_id', 'c.category_id')
@@ -10,7 +10,7 @@ function getById(id) {
         .where({ 'pc.project_id': id })
 }
 
-function getBy(filter) {
+function findBy(filter) {
     return db('project_categories').where(filter)
 }
 
@@ -26,7 +26,7 @@ async function add(ids) {
 
 //exports
 module.exports = {
-    getById,
-    getBy,
+    findById,
+    findBy,
     add
 }

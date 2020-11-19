@@ -27,7 +27,7 @@ router.get('/:id', validateId, (req, res) => {
 //[GET] /projects/:id/categories
 router.get('/:id/categories', validateId, async (req, res, next) => {
     try {
-        const categories = await ProjectCategories.getById(req.params.id)
+        const categories = await ProjectCategories.findById(req.params.id)
         res.status(200).json({ categories })
     } catch (err) {
         next(err)
