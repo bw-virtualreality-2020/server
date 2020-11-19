@@ -9,6 +9,8 @@ function validateUser(req, res, next) {
     if (req.path === '/register') {
         if (!req.body.username || !req.body.password || !req.body.role || !req.body.email) {
             res.status(400).json({ message: 'Missing required fields.' })
+        } else if (req.body.role !== 'fundraiser' && req.body.role !== 'funder') {
+            res.status(400).json({ message: 'User role must be either fundraiser or funder.' })
         } else {
             next()
         }
