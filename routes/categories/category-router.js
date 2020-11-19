@@ -21,6 +21,16 @@ router.get('/:id', validateId, (req, res) => {
     res.status(200).json({ category: req.category })
 })
 
+//[GET] /categories/:id/projects
+router.get('/:id/projects', async (req, res, next) => {
+    try {
+        const projects = await Categories.findProjects(req.params.id)
+        res.status(200).json({ projects })
+    } catch (err) {
+        next(err)
+    }
+})
+
 //[POST] /categories
 router.post('/', validateCategory, async (req, res, next) => {
     try {
