@@ -1,6 +1,9 @@
 //imports
 const Projects = require('./project.model')
+const Categories = require('../categories/category-model')
+const ProjectCategories = require('../project_categories/project_category-model')
 const { validateId, validateProject, validateChanges } = require('./project-helpers')
+const { validateProjectCategory } = require('../project_categories/project_category-helpers')
 
 //router
 const router = require('express').Router()
@@ -21,12 +24,38 @@ router.get('/:id', validateId, (req, res) => {
     res.status(200).json({ project: req.project })
 })
 
+//[GET] /projects/:id/categories
+router.get('/:id/categories', validateId, async (req, res, next) => {
+    try {
+        const categories = await ProjectCategories.getById(req.params.id)
+        res.status(200).json({ categories })
+    } catch (err) {
+        next(err)
+    }
+})
+
 //[POST] /projects
 router.post('/', validateProject, async (req, res, next) => {
     try {
         const project = await Projects.add(req.body)
         res.status(201).json({ project })
     } catch (err) {
+        next(err)
+    }
+})
+
+//[POST] /projects/:id/categories
+router.post('/:id/categories', validateId, validateProjectCategory, async (req, res, next) => {
+    try {
+        const category = await Categories.findById(req.body.category_id)
+        if(!category) {
+            res.status(404).json({ message: `Category with id ${req.body.category_id} not found.` })
+        } else {
+            const projectCategory = await ProjectCategories.add({ project_id: req.params.id, category_id: req.body.category_id })
+            res.status(201).json({ projectCategory })
+        }
+    } catch (err) {
+        console.log(err)
         next(err)
     }
 })
