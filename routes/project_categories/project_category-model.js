@@ -24,9 +24,17 @@ async function add(ids) {
     }
 }
 
+
+function remove(ids) {
+    return db('project_categories')
+        .where(ids)
+        .del()
+}
+
 //exports
 module.exports = {
     findById,
     findBy,
-    add
+    add,
+    remove
 }

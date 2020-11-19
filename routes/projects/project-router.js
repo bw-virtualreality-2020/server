@@ -4,6 +4,7 @@ const Categories = require('../categories/category-model')
 const ProjectCategories = require('../project_categories/project_category-model')
 const { validateId, validateProject, validateChanges } = require('./project-helpers')
 const { validateProjectCategory } = require('../project_categories/project_category-helpers')
+const { validateCategoryId } = require('../categories/category-helpers')
 
 //router
 const router = require('express').Router()
@@ -77,6 +78,16 @@ router.delete('/:id', validateId, async (req, res, next) => {
     try {
         const deletedProjects = await Projects.remove(id)
         res.status(200).json({ deletedProjects })
+    } catch (err) {
+        next(err)
+    }
+})
+
+//[DELETE] /projects/:id/categories/:id
+router.delete('/:project_id/categories/:category_id', validateId, validateCategoryId, async (req, res, next) => {
+    try {
+        const deletedCategories = await ProjectCategories.remove({ 'project_id': req.params.project_id, 'category_id': req.params.category_id })
+        res.status(200).json({ deletedCategories })
     } catch (err) {
         next(err)
     }
