@@ -1,9 +1,9 @@
 //imports
-const Projects = require('./project.model')
+const Projects = require('./project-model')
 
 //middleware
 async function validateId(req, res, next) {
-    const id = req.params.id
+    const id = req.params.id || req.params.project_id
     try {
         const project = await Projects.findById(id)
         if (!project) {

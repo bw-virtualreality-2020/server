@@ -2,8 +2,8 @@
 const Categories = require('./category-model')
 
 //middleware
-async function validateId(req, res, next) {
-    const id = req.params.id
+async function validateCategoryId(req, res, next) {
+    const id = req.params.id || req.params.category_id
     try {
         const category = await Categories.findById(id)
         if (!category) {
@@ -28,6 +28,6 @@ function validateCategory(req, res, next) {
 
 //exports
 module.exports = {
-    validateId,
+    validateCategoryId,
     validateCategory
 }

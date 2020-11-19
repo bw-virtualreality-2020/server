@@ -1,6 +1,6 @@
 //imports
 const Categories = require('./category-model')
-const { validateId, validateCategory } = require('./category-helpers')
+const { validateCategoryId, validateCategory } = require('./category-helpers')
 
 //router
 const router = require('express').Router()
@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 })
 
 //[GET] /categories/:id
-router.get('/:id', validateId, (req, res) => {
+router.get('/:id', validateCategoryId, (req, res) => {
     res.status(200).json({ category: req.category })
 })
 

@@ -6,11 +6,15 @@ async function validateProjectCategory(req, res, next) {
     const project_id = req.params.id
     const category_id = req.body.category_id
     try {
-        const [projectCategory] = await ProjectCategories.getBy({ 'project_id': project_id, 'category_id': category_id })
-        if (!projectCategory) {
-            next()
+        if (!category_id) {
+            res.status(400).json({ message: 'Must provide category_id' })
         } else {
-            res.status(400).json({ message: `Project already belongs to category ${category_id}` })
+            const [projectCategory] = await ProjectCategories.findBy({ 'project_id': project_id, 'category_id': category_id })
+            if (!projectCategory) {
+                next()
+            } else {
+                res.status(400).json({ message: `Project already belongs to category ${category_id}` })
+            }
         }
     } catch (err) {
         next(err)
