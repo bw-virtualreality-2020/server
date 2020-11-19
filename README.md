@@ -22,6 +22,10 @@ BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 | GET    | /api/categories              | Returns array of saved categories                 |
 | GET    | /api/categories/:id          | Returns category object by id                     | 
 | POST   | /api/categories              | Creates category; returns new category object     |
+| GET    | /api/users                   | Returns array of saved users                      |
+| GET    | /api/users/:id               | Returns user object by id                         |
+| PUT    | /api/users/:id               | Updates user; returns new user object             |
+| DELETE | /api/users/:id               | Deletes user; returns number of deleted users     |
 
 
 ### [POST] /api/auth/register
@@ -224,6 +228,94 @@ Description: Creates new category; returns new category object.
 ```js
 {
     "category_name": Augmented Reality",
+}
+```
+
+### [GET] /api/users (admin only)
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/users`
+
+Description: Returns array of all saved users.
+
+**Sample Response**
+
+```js
+{
+    "users": [
+        {
+            "user_id": 1,
+            "user_username": "john_doe",
+            "user_password": "[encrypted password]",
+            "user_role": "admin",
+            "user_email": "example@gmail.com",
+            "user_bio": null,
+            "user_image": null
+        }
+    ]
+}
+```
+### [GET] /api/users/:id (user can only access their own account info)
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/users/:id`
+
+Description: Returns user object by id.
+
+**Sample Response**
+
+```js
+{
+    "user": {
+        "user_id": 5,
+        "user_username": "john_doe",
+        "user_password": "[encrypted password]",
+        "user_role": "fundraiser",
+        "user_email": "example@gmail.com",
+        "user_bio": null,
+        "user_image": null
+    }
+}
+```
+
+### [PUT] /api/users/:id (user may only update their own account info)
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/users/:id`
+
+Description: Updates existing user; on success returns updated user object. Failure to update a user returns null.
+
+**Accepted Fields**
+
+- **username** _(optional)_ string, must be unique, 128 chars. max
+- **password** _(optional)_ string, 128 chars. max
+- **email** _(optional)_ string, must be unique, 128 chars. max
+- **role** _(optional)_ string, must be either "fundraiser" or "funder"
+- **bio** _(optional)_ string, 255 chars. max
+- **image** _(optional)_ string, 255 chars. max
+
+**Sample Request**
+
+```js
+{
+  user_username: "john_doe"
+  user_password: "password123",
+  user_email: "johndoe@email.com",
+  user_role: "fundraiser",
+  user_bio: "",
+  user_image: "",
+}
+```
+
+### [DELETE] /api/projects/:id (admin only)
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/users/:id`
+
+Description: Deletes existing user; returns number of deleted items (1 on successful deletion or 0 on failure).
+
+
+**Sample Response**
+
+```js
+{
+    "deletedProjects": 1
 }
 ```
 
