@@ -17,6 +17,16 @@ function validateRole(req, res, next) {
     }
 }
 
+function validateChanges(req, res, next) {
+    if (req.body.user_id !== req.decoded.subject) {
+        res.status(400).json({ message: 'Cannot change user id.' })
+    } else if (req.body.user_role !== 'fundraiser' && req.body.user_role !== 'funder') {
+        res.status(400).json({ message: 'User role must be either fundraiser or funder.' })
+    } else {
+        next()
+    }
+}
+
 async function validateId(req, res, next) {
     const id = req.params.id
     try {
@@ -54,7 +64,7 @@ router.get('/:id', validateId, (req, res) => {
 })
 
 //[PUT] /users:id
-router.put('/:id', validateId, async (req, res, next) => {
+router.put('/:id', validateId, validateChanges, async (req, res, next) => {
     try {
         const { user_id } = req.user
         const { user_password } = req.body
