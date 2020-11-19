@@ -304,7 +304,7 @@ Description: Updates existing user; on success returns updated user object. Fail
 }
 ```
 
-### [DELETE] /api/projects/:id (admin only)
+### [DELETE] /api/users/:id (admin only)
 
 Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/users/:id`
 
@@ -315,7 +315,7 @@ Description: Deletes existing user; returns number of deleted items (1 on succes
 
 ```js
 {
-    "deletedProjects": 1
+    "deletedUsers": 1
 }
 ```
 
