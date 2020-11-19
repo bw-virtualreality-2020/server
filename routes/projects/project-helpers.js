@@ -28,8 +28,17 @@ function validateProject(req, res, next) {
     }
 }
 
+function validateChanges(req, res, next) {
+    if (req.body.project_id && req.body.project_id != req.params.id) {
+        res.status(400).json({ message: 'Cannot change project id.' })
+    } else {
+        next()
+    }
+}
+
 //exports
 module.exports = {
     validateId,
-    validateProject
+    validateProject,
+    validateChanges
 }

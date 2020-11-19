@@ -1,6 +1,6 @@
 //imports
 const Projects = require('./project.model')
-const { validateId, validateProject } = require('./project-helpers')
+const { validateId, validateProject, validateChanges } = require('./project-helpers')
 
 //router
 const router = require('express').Router()
@@ -32,7 +32,7 @@ router.post('/', validateProject, async (req, res, next) => {
 })
 
 //[PUT] /projects:id
-router.put('/:id', validateId, validateProject, async (req, res, next) => {
+router.put('/:id', validateId, validateChanges, async (req, res, next) => {
     const { id } = req.params
     try {
         const updatedProject = await Projects.update(id, req.body)

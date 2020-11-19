@@ -23,7 +23,7 @@ function validateUser(req, res, next) {
     }
 }
 
-function authorize(req, res, next) {
+function authorizeUser(req, res, next) {
     const jwt = require('jsonwebtoken')
     const { jwtSecret } = require('./auth-secrets')
     const token = req.headers.authorization
@@ -58,5 +58,5 @@ function generateToken(user) {
 module.exports = {
     validateUser,
     generateToken,
-    authorize
+    authorizeUser
 }

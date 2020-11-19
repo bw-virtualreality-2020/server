@@ -7,13 +7,14 @@ function find() {
     return db('users')
 }
 
+//get user by id
 function findById(id) {
     return db('users')
         .where({ 'user_id': id })
         .first()
 }
 
-//get users by filter
+//get user(s) by filter
 function findBy(filter) {
     return db('users').where(filter)
 }
@@ -41,6 +42,7 @@ async function update(id, updates) {
     }
 }
 
+//delete user
 function remove(id) {
     return db('users')
         .where({ 'user_id': id })

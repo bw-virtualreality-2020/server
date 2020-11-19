@@ -11,7 +11,7 @@ const categoryRouter = require('../routes/categories/category-router')
 
 //middleware
 const { validateUser } = require('../routes/auth/auth-helpers')
-const { authorize } = require('../routes/auth/auth-helpers')
+const { authorizeUser } = require('../routes/auth/auth-helpers')
 
 //server
 const server = express()
@@ -23,9 +23,9 @@ server.use(express.json())
 
 //routes
 server.use('/api/auth', validateUser, authRouter)
-server.use('/api/users', authorize, userRouter)
-server.use('/api/projects', authorize, projectRouter)
-server.use('/api/categories', authorize, categoryRouter)
+server.use('/api/users', authorizeUser, userRouter)
+server.use('/api/projects', authorizeUser, projectRouter)
+server.use('/api/categories', authorizeUser, categoryRouter)
 
 //endpoints
 //[GET] /

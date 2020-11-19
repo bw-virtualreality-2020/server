@@ -1,15 +1,19 @@
+//imports
 const db = require('../../database/db-config')
 
+//get projects
 function find() {
     return db('projects')
 }
 
+//get project by id
 function findById(id) {
     return db('projects')
         .where({ 'project_id': id })
         .first()
 }
 
+//add project
 async function add(project) {
     try {
         const newProject = { ...project, project_image: project.project_image || 'https://specials-images.forbesimg.com/imageserve/1150698673/960x0.jpg?fit=scale' }
@@ -21,6 +25,7 @@ async function add(project) {
     }
 }
 
+//update project
 async function update(id, updates) {
     try {
         const count = await db('projects').where({ 'project_id': id }).update(updates)
@@ -31,12 +36,14 @@ async function update(id, updates) {
     }
 }
 
+//delete project
 function remove(id) {
     return db('projects')
         .where({ 'project_id': id })
         .del()
 }
 
+//exports
 module.exports = {
     find,
     findById,

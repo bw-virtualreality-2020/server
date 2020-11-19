@@ -1,6 +1,10 @@
+//modules
 const request = require('supertest')
+
+//imports
 const server = require('./server')
 
+//server tests
 describe('server.js module', () => {
     test('testing environment is correct', () => {
         expect(process.env.DB_ENV).toBe('testing')
