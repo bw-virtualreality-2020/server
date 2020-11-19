@@ -10,22 +10,26 @@ BASE URL: https://bw-virtualreality-2020.herokuapp.com/
 
 --All routes require valid token in **authorization** header except `/api/auth/register` and `/api/auth/login`.
 
-| Method | Endpoint                     | Description                                       |
-| :----- | :--------------------------- | :------------------------------------------------ |
-| POST   | /api/auth/register           | Creates user; returns new user object and token   |
-| POST   | /api/auth/login              | Authenticates user; returns user object and token |
-| GET    | /api/projects                | Returns array of saved projects                   |
-| GET    | /api/projects/:id            | Returns project object by id                      |
-| POST   | /api/projects                | Creates project; returns new project object       |
-| PUT    | /api/projects/:id            | Updates project; returns updated project object   |
-| DELETE | /api/projects/:id            | Deletes project; returns number of deleted items  |
-| GET    | /api/categories              | Returns array of saved categories                 |
-| GET    | /api/categories/:id          | Returns category object by id                     | 
-| POST   | /api/categories              | Creates category; returns new category object     |
-| GET    | /api/users                   | Returns array of saved users                      |
-| GET    | /api/users/:id               | Returns user object by id                         |
-| PUT    | /api/users/:id               | Updates user; returns new user object             |
-| DELETE | /api/users/:id               | Deletes user; returns number of deleted users     |
+| Method | Endpoint                         | Description                                       |
+| :----- | :---------------------------     | :------------------------------------------------ |
+| POST   | /api/auth/register               | Creates user; returns new user object and token   |
+| POST   | /api/auth/login                  | Authenticates user; returns user object and token |
+| GET    | /api/projects                    | Returns array of saved projects                   |
+| GET    | /api/projects/:id                | Returns project object by id                      |
+| GET    | /api/projects/:id/categories     | Returns array of project categories by id         |
+| POST   | /api/projects                    | Creates project; returns new project object       |
+| POST   | /api/projects/:id/categories     | Adds project to category; returns resource id     |
+| PUT    | /api/projects/:id                | Updates project; returns updated project object   |
+| DELETE | /api/projects/:id                | Deletes project; returns number of deleted items  |
+| DELETE | /api/projects/:id/categories/:id | Deletes project category; returns items deleted   |
+| GET    | /api/categories                  | Returns array of saved categories                 |
+| GET    | /api/categories/:id              | Returns category object by id                     |
+| GET    | /api/categories/:id/projects     | Returns array of category projects by id          |
+| POST   | /api/categories                  | Creates category; returns new category object     |
+| GET    | /api/users                       | Returns array of saved users                      |
+| GET    | /api/users/:id                   | Returns user object by id                         |
+| PUT    | /api/users/:id                   | Updates user; returns new user object             |
+| DELETE | /api/users/:id                   | Deletes user; returns number of deleted users     |
 
 
 ### [POST] /api/auth/register
@@ -114,6 +118,24 @@ Description: Returns project object by id.
     }
 }
 ```
+### [GET] /api/projects/:id/categories
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects/:id/categories`
+
+Description: Returns array of project categories by id.
+
+**Sample Response**
+
+```js
+{
+    "categories": [
+        {
+            "category_name": "Augmented Reality",
+            "category_id": 1
+        }
+    ]
+}
+```
 
 ### [POST] /api/projects
 
@@ -136,6 +158,23 @@ Description: Creates new project; returns new project object.
     "project_description": "",
     "project_goal": 5000,
     "project_image": "https://cdn.pixabay.com/photo/2019/01/31/20/52/web-3967926_960_720.jpg"
+}
+```
+### [POST] /api/projects/:id/categories
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects/:id/categories`
+
+Description: Adds project to existing category; returns id of created project_category resource.
+
+**Accepted Fields**
+
+- **category_id** _(required)_ id must correspond to an existing category
+
+**Sample Request**
+
+```js
+{
+    "category_id": 1
 }
 ```
 
@@ -177,6 +216,20 @@ Description: Deletes existing project; returns number of deleted items (1 on suc
     "deletedProjects": 1
 }
 ```
+### [DELETE] /api/projects/:id/categories/:id
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/projects/:project_id/categories/:category_id`
+
+Description: Deletes project from category; returns number of deleted items.
+
+
+**Sample Response**
+
+```js
+{
+    "deletedCategories": 1
+}
+```
 
 ### [GET] /api/categories
 
@@ -210,6 +263,34 @@ Description: Returns category object by id.
         "category_id": 1,
         "category_name": "Augmented Reality"
     }
+}
+```
+### [GET] /api/categories/:id/projects
+
+Endpoint: `https://bw-virtualreality-2020.herokuapp.com/api/categories/:id/projects`
+
+Description: Returns array of category projects by id.
+
+**Sample Response**
+
+```js
+{
+    "projects": [
+        {
+            "project_id": 1,
+            "project_name": "Virtual Reality Venture",
+            "project_description": "Funding project for virtual reality venture",
+            "project_goal": "5000.00",
+            "project_image": null
+        },
+        {
+            "project_id": 3,
+            "project_name": "Pintereach 2020",
+            "project_description": "Funding project for Pintereach 2020",
+            "project_goal": "3500.00",
+            "project_image": "https://specials-images.forbesimg.com/imageserve/1150698673/960x0.jpg?fit=scale"
+        }
+    ]
 }
 ```
 
